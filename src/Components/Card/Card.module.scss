@@ -1,0 +1,114 @@
+.card {
+  grid-column: span 4;
+  height: 260px;
+  position: relative;
+  overflow: hidden;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  transform: scale(1);
+  transition: transform 800ms ease;
+}
+
+.card:hover .img {
+  transform: scale(1.2);
+  transition: transform 500ms ease;
+}
+
+.infoOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: var(--background-primary);
+  height: 82px;
+  width: 300px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.line {
+  position: absolute;
+  background-color: var(--accent);
+  height: 42px;
+  width: 1px;
+}
+
+.textField1 {
+  opacity: 100%;
+  margin: 0 20px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+  transition: transform 500ms ease;
+}
+
+.card:hover .infoOverlay .textField1 {
+  transform: translateY(80px);
+  transition: transform 500ms ease;
+}
+
+.textField2 {
+  margin: 0 20px;
+  opacity: 100%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+  transform: translateX(-320px);
+  transition: transform 500ms ease;
+}
+
+.card:hover .infoOverlay .textField2 {
+  transform: translateX(0);
+  transition: transform 500ms ease;
+}
+
+.mainText {
+  color: var(--color-primary);
+  text-align: start;
+  font-family: Cormorant SC;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.secondaryText {
+  color: var(--accent);
+  text-align: start;
+  font-family: Inter;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+@media (max-width: 1440px) {
+  .card {
+    height: 260px;
+  }
+  .infoOverlay {
+    height: 82px;
+    width: 300px;
+  }
+}
+
+@media (max-width: 1280px) {
+  .card {
+    height: 220px;
+  }
+  .infoOverlay {
+    height: 66px;
+    width: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    height: 185px;
+  }
+  .infoOverlay {
+    height: 45px;
+    width: 236px;
+  }
+}

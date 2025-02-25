@@ -1,0 +1,14 @@
+.searchInfo {
+  text-align: start;
+  grid-column: span 4;
+  max-height: 260px;
+  color: var(--color-primary);
+}
+
+.searchHeader {
+  font-weight: 500;
+}
+
+.searchText {
+  color: var(--secondary-gray);
+}
