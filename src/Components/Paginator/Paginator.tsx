@@ -5,6 +5,8 @@ import ReactPaginate from "react-paginate";
 import { useQuery } from "@tanstack/react-query";
 import { fetchPaintings } from "../../API/api";
 import { PAINTINGS_PER_PAGE } from "../../API/constants";
+import previousPage from "/previousPage.svg";
+import nextPage from "/nextPage.svg";
 
 interface PaginatorProps {
   currentPage: number;
@@ -63,9 +65,9 @@ export const Paginator: React.FC<PaginatorProps> = ({
           previousClassName={styles.previousItem}
           disabledClassName={styles.disabledItem}
           previousLabel={
-            <img src="/previousPage.svg" className={styles.label} />
+            <img src={previousPage} className={styles.label} />
           }
-          nextLabel={<img src="/nextPage.svg" className={styles.label} />}
+          nextLabel={<img src={nextPage} className={styles.label} />}
           renderOnZeroPageCount={null}
         ></ReactPaginate>
       )}
