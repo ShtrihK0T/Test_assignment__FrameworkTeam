@@ -12,3 +12,19 @@ export default [
   ...tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
 ];
+
+module.exports = {
+  extends: [
+    "airbnb",
+    "airbnb-typescript",
+    "plugin:prettier/recommended",
+    "eslint:recommended",
+  ],
+  parserOptions: {
+    project: "./tsconfig.json",
+  },
+  plagins: ["prettier"],
+  rules: {
+    "prettier/prettier": "error",
+  },
+};
