@@ -1,8 +1,8 @@
 import React from "react";
-import { fetchPage } from "../../API/api";
+import { fetchPage } from "../../../API/api";
 import { useQuery } from "@tanstack/react-query";
 import { Card } from "../Card/Card";
-import { Painting } from "../../API/painting";
+import { IPainting } from "../../../API/painting";
 import styles from "./Content.module.scss";
 
 interface contentProps {
@@ -19,7 +19,7 @@ export const Content: React.FC<contentProps> = ({ currentPage, search }) => {
   return (
     <>
       {data &&
-        data.map((painting: Painting) => {
+        data.map((painting: IPainting) => {
           return <Card key={painting.id} painting={painting}></Card>;
         })}
       {data && data.length === 0 && (

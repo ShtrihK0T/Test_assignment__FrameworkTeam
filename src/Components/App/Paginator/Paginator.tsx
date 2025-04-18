@@ -3,8 +3,8 @@ import { useEffect } from "react";
 import styles from "./Paginator.module.scss";
 import ReactPaginate from "react-paginate";
 import { useQuery } from "@tanstack/react-query";
-import { fetchPaintings } from "../../API/api";
-import { PAINTINGS_PER_PAGE } from "../../API/constants";
+import { fetchPaintings } from "../../../API/api";
+import { PAINTINGS_PER_PAGE } from "../../../API/constants";
 import previousPage from "/previousPage.svg";
 import nextPage from "/nextPage.svg";
 
@@ -64,9 +64,7 @@ export const Paginator: React.FC<PaginatorProps> = ({
           nextClassName={styles.nextItem}
           previousClassName={styles.previousItem}
           disabledClassName={styles.disabledItem}
-          previousLabel={
-            <img src={previousPage} className={styles.label} />
-          }
+          previousLabel={<img src={previousPage} className={styles.label} />}
           nextLabel={<img src={nextPage} className={styles.label} />}
           renderOnZeroPageCount={null}
         ></ReactPaginate>

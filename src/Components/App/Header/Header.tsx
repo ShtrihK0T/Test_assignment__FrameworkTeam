@@ -3,23 +3,20 @@ import Logo from "/logo.svg";
 import lightThemeBtn from "/lightThemeBtn.svg";
 import darkThemeBtn from "/darkThemeBtn.svg";
 import styles from "./Header.module.scss";
+import { useThemeContext } from "../context";
 
-interface HeaderProps {
-  theme: string;
-  setTheme: React.Dispatch<React.SetStateAction<string>>;
-}
 
-export const Header: React.FC<HeaderProps> = ({ theme, setTheme }) => {
+
+export const Header: React.FC = () => {
+  const {theme, toggleTheme} = useThemeContext();
+
   const handleThemeBtn = () => {
-    if (theme === "dark") {
-      setTheme("light");
-    } else setTheme("dark");
+    toggleTheme();
   };
 
   return (
     <header className={styles.header}>
-      {theme === "dark" && <img className={styles.logo} src={Logo}></img>}
-      {theme === "light" && <img className={styles.logo} src={Logo}></img>}
+      <img className={styles.logo} src={Logo}></img>
       <button className={styles.themebtn} onClick={handleThemeBtn}>
         {theme === "light" && (
           <img src={lightThemeBtn} className={styles.themeIcon}></img>

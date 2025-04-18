@@ -1,4 +1,4 @@
-export interface Painting
+export interface IPainting
   {
     authorId: number;
     created: string;

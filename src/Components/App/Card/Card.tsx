@@ -1,12 +1,12 @@
 import React from "react";
 import styles from "./card.module.scss";
 import { useQuery } from "@tanstack/react-query";
-import { fetchAddInfo } from "../../API/api";
-import { Painting } from "../../API/painting";
-import { BASE_URL } from "../../API/constants";
+import { fetchAddInfo } from "../../../API/api";
+import { IPainting } from "../../../API/painting";
+import { BASE_URL } from "../../../API/constants";
 
 interface CardProps {
-  painting: Painting;
+  painting: IPainting;
 }
 
 export const Card: React.FC<CardProps> = ({ painting }) => {
