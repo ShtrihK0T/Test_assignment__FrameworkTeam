@@ -3,12 +3,10 @@ import Logo from "/logo.svg";
 import lightThemeBtn from "/lightThemeBtn.svg";
 import darkThemeBtn from "/darkThemeBtn.svg";
 import styles from "./Header.module.scss";
-import { useThemeContext } from "../context";
-
-
+import { useThemeContext } from "../themeContext";
 
 export const Header: React.FC = () => {
-  const {theme, toggleTheme} = useThemeContext();
+  const { theme, toggleTheme } = useThemeContext();
 
   const handleThemeBtn = () => {
     toggleTheme();

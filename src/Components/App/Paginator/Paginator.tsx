@@ -23,12 +23,11 @@ export const Paginator: React.FC<PaginatorProps> = ({
   setCurrentPage,
   setPageCount,
 }) => {
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["pages", search],
     queryFn: () => fetchPaintings(search),
   });
 
-  console.log(data);
 
   useEffect(() => {
     if (data && data.length) {
@@ -44,7 +43,6 @@ export const Paginator: React.FC<PaginatorProps> = ({
     setCurrentPage(event.selected + 1);
   };
 
-  console.log("currentPage", currentPage);
   return (
     <>
       {currentPage > 0 && (

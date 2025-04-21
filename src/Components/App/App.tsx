@@ -5,7 +5,7 @@ import { Header } from "./Header/Header";
 import { Content } from "./Content/Content";
 import { Paginator } from "./Paginator/Paginator";
 import { Search } from "./Search/Search";
-import { ThemeProvider } from "./context";
+import { ThemeProvider } from "./themeContext";
 
 export const App: React.FC = () => {
   const [pageCount, setPageCount] = useState(0);
@@ -14,9 +14,9 @@ export const App: React.FC = () => {
 
   return (
     <ThemeProvider>
-      <Header/>
-      <Search setSearch={setSearch} />
+      <Header />
       <div className={styles.grid}>
+        <Search setSearch={setSearch} />
         <Content currentPage={currentPage} search={search} />
       </div>
       <Paginator

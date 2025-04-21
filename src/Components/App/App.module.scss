@@ -1,5 +1,5 @@
 :root {
-  max-width: 1440px;
+  max-width: 100%;
   margin: 0 auto;
   text-align: center;
   justify-content: center;
@@ -7,7 +7,7 @@
 
 .grid {
   margin: 0px 100px;
-  max-width: 1240px;
+  max-width: 100%;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: 32px;
@@ -15,11 +15,11 @@
 
 @media (max-width: 1440px) {
   :root {
-    max-width: 1280px;
+    max-width: 100%;
   }
   .grid {
     margin: 0px 20px;
-    max-width: 1240px;
+    max-width: 100%;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     gap: 32px;
@@ -28,11 +28,11 @@
 
 @media (max-width: 1280px) {
   :root {
-    max-width: 768px;
+    max-width: 100%;
   }
   .grid {
     margin: 0px 20px;
-    max-width: 728px;
+    max-width: 100%;
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     gap: 24px;
@@ -41,11 +41,11 @@
 
 @media (max-width: 768px) {
   :root {
-    max-width: 320px;
+    max-width: 100%;
   }
   .grid {
     margin: 0px 20px;
-    max-width: 280px;
+    max-width: 100%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 5px;

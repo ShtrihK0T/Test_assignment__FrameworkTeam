@@ -1,6 +1,6 @@
 .card {
   grid-column: span 4;
-  height: 260px;
+  height: 18vw;
   position: relative;
   overflow: hidden;
 }
@@ -22,8 +22,8 @@
   bottom: 0;
   left: 0;
   background-color: var(--background-primary);
-  height: 82px;
-  width: 300px;
+  height: 5.7vw;
+  width: 20.8vw;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -32,11 +32,11 @@
 .line {
   position: absolute;
   background-color: var(--accent);
-  height: 42px;
+  height:50%;
   width: 1px;
 }
 
-.textField1 {
+.frontTextField {
   opacity: 100%;
   margin: 0 20px;
   position: absolute;
@@ -46,12 +46,12 @@
   transition: transform 500ms ease;
 }
 
-.card:hover .infoOverlay .textField1 {
+.card:hover .infoOverlay .frontTextField {
   transform: translateY(80px);
   transition: transform 500ms ease;
 }
 
-.textField2 {
+.sideTextField {
   margin: 0 20px;
   opacity: 100%;
   position: absolute;
@@ -62,7 +62,7 @@
   transition: transform 500ms ease;
 }
 
-.card:hover .infoOverlay .textField2 {
+.card:hover .infoOverlay .sideTextField {
   transform: translateX(0);
   transition: transform 500ms ease;
 }
@@ -85,30 +85,30 @@
 
 @media (max-width: 1440px) {
   .card {
-    height: 260px;
+    height: 20vw
   }
   .infoOverlay {
-    height: 82px;
-    width: 300px;
+    height: 6.4vw;
+    width: 23.4vw;
   }
 }
 
 @media (max-width: 1280px) {
   .card {
-    height: 220px;
+    height:28vw
   }
   .infoOverlay {
-    height: 66px;
-    width: 300px;
+    height: 8.6vw;
+    width: 39vw;
   }
 }
 
 @media (max-width: 768px) {
   .card {
-    height: 185px;
+    height: 54vw
   }
   .infoOverlay {
-    height: 45px;
-    width: 236px;
+    height: 14vw;
+    width: 74vw;
   }
 }

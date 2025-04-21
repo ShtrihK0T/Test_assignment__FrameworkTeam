@@ -20,11 +20,11 @@ export const Card: React.FC<CardProps> = ({ painting }) => {
       <img className={styles.img} src={BASE_URL + painting.imageUrl}></img>
       <div className={styles.infoOverlay}>
         <div className={styles.line}></div>
-        <div className={styles.textField1}>
+        <div className={styles.frontTextField}>
           <span className={styles.mainText}>{painting.name}</span>
           <span className={styles.secondaryText}>{painting.created}</span>
         </div>
-        <div className={styles.textField2}>
+        <div className={styles.sideTextField}>
           <span className={styles.mainText}>{data && data.authorName}</span>
           <span className={styles.secondaryText}>{data && data.location}</span>
         </div>
