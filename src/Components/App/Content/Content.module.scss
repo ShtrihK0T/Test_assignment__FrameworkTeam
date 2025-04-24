@@ -12,3 +12,13 @@
 .searchText {
   color: var(--secondary-gray);
 }
+
+.loading {
+  color: var(--color-primary);
+}
+
+.errorMesage {
+  color: var(--color-primary);
+  grid-column: span 4;
+  text-align: start;
+}

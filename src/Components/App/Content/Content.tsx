@@ -11,18 +11,21 @@ interface contentProps {
 }
 
 export const Content: React.FC<contentProps> = ({ currentPage, search }) => {
-  const { data } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["paintings", currentPage, search],
     queryFn: () => fetchPage(currentPage, search),
   });
 
   return (
     <>
-      {data &&
-        data.map((painting: IPainting) => {
-          return <Card key={painting.id} painting={painting}></Card>;
-        })}
-      {data && data.length === 0 && (
+      {data?.map((painting: IPainting) => {
+        return <Card key={painting.id} painting={painting}></Card>;
+      }) ||
+        (isLoading && <span className={styles.loading}>{"Loading..."}</span>) ||
+        (error && (
+          <span className={styles.errorMesage}>{"A loading error has occurred"}</span>
+        ))}
+      {data?.length === 0 && (
         <div className={styles.searchInfo}>
           No matches for <span className={styles.searchHeader}> {search}</span>
           <p className={styles.serachText}>

@@ -1,9 +1,17 @@
 import axios from "axios";
-import { BASE_URL, PAINTINGS_PER_PAGE } from "./constants";
+export const PAINTINGS_PER_PAGE = 6;
 
-export const fetchPaintings = async (serch: string = "") => {
+const api = axios.create({
+  baseURL: 'https://test-front.framework.team',
+  timeout: 5000,
+  headers: {
+    'Content-Type': 'application/json'
+  }
+});
+
+export const fetchPaintings = async (search: string = "") => {
   try {
-    const response = await axios.get(`${BASE_URL}/paintings?q=${serch}`);
+    const response = await api.get(`/paintings?q=${search}`);
     return response.data;
   } catch (e) {
     console.log(e);
@@ -12,25 +20,23 @@ export const fetchPaintings = async (serch: string = "") => {
 
 export const fetchAddInfo = async (authorId: number, locationId: number) => {
   try {
-    const responseAuthor = await axios.get(
-      `${BASE_URL}/authors?id=${authorId}`
-    );
-    const responseLocation = await axios.get(
-      `${BASE_URL}/locations?id=${locationId}`
-    );
+    const [authorResponse, locationResponse] = await Promise.all([
+      api.get(`/authors?id=${authorId}`),
+      api.get(`/locations?id=${locationId}`),
+    ]);
     return {
-      authorName: responseAuthor.data[0].name,
-      location: responseLocation.data[0].location,
+      authorName: authorResponse.data[0].name,
+      location: locationResponse.data[0].location,
     };
   } catch (e) {
     console.log(e);
   }
 };
 
-export const fetchPage = async (page: number, serch: string = "") => {
+export const fetchPage = async (page: number, search: string = "") => {
   try {
-    const response = await axios.get(
-      `${BASE_URL}/paintings?q=${serch}&_page=${page}&_limit=${PAINTINGS_PER_PAGE}`
+    const response = await api.get(
+      `/paintings?q=${search}&_page=${page}&_limit=${PAINTINGS_PER_PAGE}`
     );
     return response.data;
   } catch (e) {

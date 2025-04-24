@@ -10,7 +10,7 @@ interface CardProps {
 }
 
 export const Card: React.FC<CardProps> = ({ painting }) => {
-  const { data } = useQuery({
+  const { data, isLoading} = useQuery({
     queryKey: ["addInfo"],
     queryFn: () => fetchAddInfo(painting.authorId, painting.locationId),
   });
@@ -25,8 +25,8 @@ export const Card: React.FC<CardProps> = ({ painting }) => {
           <span className={styles.secondaryText}>{painting.created}</span>
         </div>
         <div className={styles.sideTextField}>
-          <span className={styles.mainText}>{data && data.authorName}</span>
-          <span className={styles.secondaryText}>{data && data.location}</span>
+          <span className={styles.mainText}>{data?.authorName || isLoading && 'Loading...'}</span>
+          <span className={styles.secondaryText}>{data?.location || isLoading && 'Loading...'}</span>
         </div>
       </div>
     </div>

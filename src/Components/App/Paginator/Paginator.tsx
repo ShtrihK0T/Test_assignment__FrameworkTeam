@@ -23,18 +23,17 @@ export const Paginator: React.FC<PaginatorProps> = ({
   setCurrentPage,
   setPageCount,
 }) => {
-  const { data, isLoading } = useQuery({
+  const { data } = useQuery({
     queryKey: ["pages", search],
     queryFn: () => fetchPaintings(search),
   });
 
 
   useEffect(() => {
-    if (data && data.length) {
+    if (data?.length) {
       pageCount = Math.ceil(data.length / PAINTINGS_PER_PAGE);
       setPageCount(pageCount);
       setCurrentPage(1);
-      console.log("pagecount", pageCount);
     } else {
       setPageCount(0);
     }
