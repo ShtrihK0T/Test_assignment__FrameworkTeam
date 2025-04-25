@@ -1,27 +1,16 @@
-import React, { useState } from "react";
 import styles from "./Search.module.scss";
 import SearchIcon from "/searchIcon.svg";
 
 interface SearchProps {
+  search: string;
   setSearch: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export const Search: React.FC<SearchProps> = ({ setSearch }) => {
-  const [inputValue, setInputValue] = useState("");
+export const Search: React.FC<SearchProps> = ({ setSearch, search }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-  };
-
-  const handleBlur = () => {
-    setSearch(inputValue);
-  };
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      setSearch(inputValue);
-    }
+    setSearch(e.target.value);
   };
   const handleButton = () => {
-    setInputValue("");
     setSearch("");
   };
 
@@ -31,12 +20,10 @@ export const Search: React.FC<SearchProps> = ({ setSearch }) => {
       <input
         className={styles.input}
         placeholder="Search"
-        value={inputValue}
+        value={search}
         onChange={handleChange}
-        onBlur={handleBlur}
-        onKeyDown={handleKeyDown}
       ></input>
-      {inputValue && (
+      {search && (
         <button className={styles.resetBtn} onClick={handleButton}></button>
       )}
     </div>

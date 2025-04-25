@@ -16,7 +16,7 @@ export const App: React.FC = () => {
     <ThemeProvider>
       <Header />
       <div className={styles.grid}>
-        <Search setSearch={setSearch} />
+        <Search search={search} setSearch={setSearch} />
         <Content currentPage={currentPage} search={search} />
       </div>
       <Paginator

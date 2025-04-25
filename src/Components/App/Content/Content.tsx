@@ -3,6 +3,7 @@ import { fetchPage } from "../../../API/api";
 import { useQuery } from "@tanstack/react-query";
 import { Card } from "../Card/Card";
 import { IPainting } from "../../../API/painting";
+import { useDebounce } from "../../../API/useDebounce";
 import styles from "./Content.module.scss";
 
 interface contentProps {
@@ -11,8 +12,9 @@ interface contentProps {
 }
 
 export const Content: React.FC<contentProps> = ({ currentPage, search }) => {
+  const debouncedSearch = useDebounce(search, 1000);
   const { data, isLoading, error } = useQuery({
-    queryKey: ["paintings", currentPage, search],
+    queryKey: ["paintings", currentPage, debouncedSearch],
     queryFn: () => fetchPage(currentPage, search),
   });
 
