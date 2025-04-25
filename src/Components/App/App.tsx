@@ -8,7 +8,7 @@ import { Search } from "./Search/Search";
 import { ThemeProvider } from "./themeContext";
 
 export const App: React.FC = () => {
-  const [pageCount, setPageCount] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [search, setSearch] = useState("");
 
@@ -21,10 +21,10 @@ export const App: React.FC = () => {
       </div>
       <Paginator
         currentPage={currentPage}
-        pageCount={pageCount}
+        totalPages={totalPages}
         search={search}
         setCurrentPage={setCurrentPage}
-        setPageCount={setPageCount}
+        setTotalPages={setTotalPages}
       ></Paginator>
     </ThemeProvider>
   );

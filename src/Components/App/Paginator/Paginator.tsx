@@ -1,7 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
 import styles from "./Paginator.module.scss";
-import ReactPaginate from "react-paginate";
 import { useQuery } from "@tanstack/react-query";
 import { fetchPaintings } from "../../../API/api";
 import { PAINTINGS_PER_PAGE } from "../../../API/constants";
@@ -10,62 +9,96 @@ import nextPage from "/nextPage.svg";
 
 interface PaginatorProps {
   currentPage: number;
-  pageCount: number;
+  totalPages: number;
   search: string;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
-  setPageCount: React.Dispatch<React.SetStateAction<number>>;
+  setTotalPages: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export const Paginator: React.FC<PaginatorProps> = ({
   currentPage,
-  pageCount,
+  totalPages,
   search,
   setCurrentPage,
-  setPageCount,
+  setTotalPages,
 }) => {
   const { data } = useQuery({
     queryKey: ["pages", search],
     queryFn: () => fetchPaintings(search),
   });
 
-
   useEffect(() => {
     if (data?.length) {
-      pageCount = Math.ceil(data.length / PAINTINGS_PER_PAGE);
-      setPageCount(pageCount);
+      totalPages = Math.ceil(data.length / PAINTINGS_PER_PAGE);
+      setTotalPages(totalPages);
       setCurrentPage(1);
     } else {
-      setPageCount(0);
+      setTotalPages(0);
     }
   }, [data, search]);
-  const handlePageClick = (event: { selected: number }) => {
-    setCurrentPage(event.selected + 1);
+  const handlePageClick = (page: number) => {
+    setCurrentPage(page);
   };
 
-  return (
-    <>
-      {currentPage > 0 && (
-        <ReactPaginate
-          forcePage={currentPage - 1}
-          onPageChange={handlePageClick}
-          pageRangeDisplayed={2}
-          marginPagesDisplayed={1}
-          pageCount={pageCount}
-          containerClassName={styles.paginator}
-          activeClassName={styles.active}
-          pageLinkClassName={styles.pageLink}
-          breakLinkClassName={styles.breakLink}
-          nextLinkClassName={styles.nextLink}
-          pageClassName={styles.pageItem}
-          breakClassName={styles.breakItem}
-          nextClassName={styles.nextItem}
-          previousClassName={styles.previousItem}
-          disabledClassName={styles.disabledItem}
-          previousLabel={<img src={previousPage} className={styles.label} />}
-          nextLabel={<img src={nextPage} className={styles.label} />}
-          renderOnZeroPageCount={null}
-        ></ReactPaginate>
-      )}
-    </>
+  const pageNumbers = [];
+
+  // Добавляем первую страницу
+  if (currentPage > 2) pageNumbers.push(1);
+  // Добавляем "..." если между первой и текущей страницей есть пропуск
+  if (currentPage > 3 && totalPages > 4) pageNumbers.push("...");
+  // Добавляем страницу если активна первая
+  if (totalPages >= 4 && currentPage === totalPages) pageNumbers.push(currentPage - 2);
+  // Добавляем соседние страницы (предыдущая, текущая, следующая)
+  for (let i = currentPage - 1; i <= currentPage + 1; i++) {
+    if (i >= 1 && i <= totalPages) {
+      pageNumbers.push(i);
+    }
+  }
+  // Добавляем страницу если активна последняя
+  if (totalPages >= 4 && currentPage === 1) pageNumbers.push(currentPage + 2);
+  // Добавляем "..." если между последней страницей и текущей есть пропуск
+  if (currentPage < totalPages - 2 && totalPages > 4) pageNumbers.push("...");
+  // Добавляем последнюю страницу
+  if (currentPage < totalPages - 1) pageNumbers.push(totalPages);
+
+  if (totalPages > 0) return (
+    <ul className={styles.paginator}>
+      <li className={styles.previousItem}>
+        <a
+          className={styles.previousLink}
+          style={{pointerEvents: (currentPage === 1) ? 'none' : 'auto'}}
+          onClick={() => handlePageClick(currentPage - 1)}
+        >
+          <img src={previousPage}></img>
+        </a>
+      </li>
+
+      {pageNumbers.map((page, index) => {
+        if (page === "...") {
+          return (
+            <li key={index} className={styles.breakItem}>
+              <a>...</a>
+            </li>
+          );
+        }
+        return (
+          <li
+            key={index}
+            className={`${page === currentPage ? styles.active : ""} ${styles.pageItem}`}
+          >
+            <a className={styles.pageLink} onClick={() => handlePageClick(Number(page))}>{page}</a>
+          </li>
+        );
+      })}
+
+      <li className={styles.nextItem}>
+        <a
+          style={{pointerEvents: (currentPage === totalPages) ? 'none' : 'auto'}}
+          onClick={() => handlePageClick(currentPage + 1)}
+        >
+          <img src={nextPage}></img>
+        </a>
+      </li>
+    </ul>
   );
 };

@@ -20,6 +20,7 @@
   overflow: hidden;
   justify-content: center;
   align-content: center;
+  border-bottom: 1px solid var(--background-primary)
 }
 
 .active {
@@ -61,17 +62,10 @@
   padding: 10px;
 }
 
-.label {
-  align-self: flex-start;
-}
-
-.breakLink {
-  cursor: pointer;
-}
-
 .breakItem {
   height: 24px;
   width: 29px;
+  color: (--primary-gray);
 }
 
 .disabledItem {
